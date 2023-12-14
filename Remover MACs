@@ -1,0 +1,19 @@
+:foreach lease in= [/ip dhcp-server lease find] do= {
+  :local macAddress [/ip dhcp-server lease get $lease mac-address];
+  :if ($macAddress = "00:00:00:00:00:00") do= {
+    /ip dhcp-server lease remove $lease;
+  }
+}
+
+
+
+
+### [/ip dhcp-server lease find]: Essa parte lista todas as concessões de DHCP no roteador.
+
+:foreach lease in= [/ip dhcp-server lease find] do= { ... }: Este é um loop que itera sobre cada concessão de DHCP encontrada na etapa anterior.
+
+:local macAddress [/ip dhcp-server lease get $lease mac-address];: Isso armazena o endereço MAC da concessão DHCP atual em uma variável local chamada macAddress.
+
+:if ($macAddress = "00:00:00:00:00:00") do= { ... }: Aqui, o script verifica se o endereço MAC é igual a "00:00:00:00:00:00".
+
+/ip dhcp-server lease remove $lease;: Se o endereço MAC for "00:00:00:00:00:00", então essa linha remove a concessão de DHCP correspondente.###
